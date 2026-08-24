@@ -7,7 +7,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Personal job-application portfolio for **Vuttipat Prapai (Dew)**, targeting two roles:
 **AI Specialist** (primary emphasis) and **Graphic Designer** (secondary).
 
-Live at `https://diiwzz.github.io/portfolio/` — GitHub Pages, repo `DiiwzZ/portfolio`, branch `master`.
+Target deploy is `https://diiwzz.github.io/portfolio-2026/` — GitHub Pages, repo
+`DiiwzZ/portfolio-2026`, branch `master`.
+
+**This is a deliberate fork of the old site.** `DiiwzZ/portfolio` still exists, still serves
+`https://diiwzz.github.io/portfolio/`, and holds an older version of this page. It is not to be
+touched — no pushing, no force-pushing, no adding it as a remote. All work happens in the new repo
+so the live site keeps working while this one is rebuilt.
 
 Audience is recruiters, not developers. Every change should be judged by "does this make a hiring
 manager trust him more?" — not by code elegance.
@@ -32,9 +38,14 @@ Deploy (GitHub Pages rebuilds in 1–2 min):
 git push origin master
 ```
 
-**Before the first push:** this repo was `git init`-ed locally on 2026-08-24 and has fresh history
-unrelated to whatever is on `DiiwzZ/portfolio`. Pushing will require reconciling with the remote —
-check `git remote -v` and the remote's history first. Do not force-push without asking.
+This repo was `git init`-ed locally on 2026-08-25 with fresh history. Because `portfolio-2026` is a
+brand-new empty repo, the first push is an ordinary fast-forward — there is nothing to reconcile and
+no reason to force-push.
+
+The three places that hardcode the deploy URL are `og:image` ([index.html:10](index.html:10)) and
+the Contact link's `href` and label ([index.html:1335](index.html:1335),
+[:1339](index.html:1339)). `pujo-cat_hotel` at [index.html:1224](index.html:1224) is a different
+project — leave it alone.
 
 ## Architecture
 

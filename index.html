@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vuttipat Prapai — Portfolio</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌠</text></svg>">
+  <meta property="og:title" content="Vuttipat Prapai — Portfolio">
+  <meta property="og:description" content="Graphic Designer & UX/UI Designer — Bangkok University">
+  <meta property="og:image" content="https://diiwzz.github.io/portfolio/images/infographic.png">
+  <meta name="description" content="Portfolio of Vuttipat Prapai — Graphic Design, UX/UI, Frontend Development">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <style>
+    /* ─── Tokens ─── */
+    :root {
+      --bg: #080808;
+      --bg1: #0f0f0f;
+      --bg2: #161616;
+      --border: #242424;
+      --border-hi: #363636;
+      --text: #e8e8e8;
+      --text-dim: #888;
+      --text-faint: #444;
+      --accent: oklch(72% 0.14 195);
+      --accent-dim: oklch(72% 0.14 195 / 0.15);
+      --accent-glow: oklch(72% 0.14 195 / 0.25);
+      --gold: #e8a833;
+      --gold-dim: #e8a83322;
+      --radius: 12px;
+      --radius-lg: 20px;
+    }
+
+    /* ─── Reset ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 15px;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ─── Scroll reveal ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ─── Nav ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 56px;
+      background: var(--bg)/0;
+      border-bottom: 1px solid transparent;
+      transition: background 0.4s, border-color 0.4s, backdrop-filter 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(8,8,8,0.85);
+      border-color: var(--border);
+      backdrop-filter: blur(16px);
+    }
+    .nav-brand {
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--text);
+      opacity: 0.7;
+    }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      color: var(--text-dim);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 8px;
+      padding: 6px 10px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    /* ─── Hero ─── */
+    .hero {
+      min-height: 100dvh;
+      display: flex;
+      align-items: flex-end;
+      padding: 0 40px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('images/main.png');
+      background-size: 45%;
+      background-position: right 5% center;
+      background-repeat: no-repeat;
+      filter: brightness(0.45) saturate(0.6);
+      transition: filter 0.5s;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(105deg, var(--bg) 38%, transparent 72%),
+                  linear-gradient(to top, var(--bg) 0%, transparent 30%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 680px;
+    }
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      color: var(--accent);
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.3s forwards;
+    }
+    .hero-name {
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: #fff;
+      margin-bottom: 16px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.5s forwards;
+    }
+    .hero-role {
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      color: var(--text-dim);
+      font-weight: 400;
+      margin-bottom: 36px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.7s forwards;
+    }
+    .hero-role .typing {
+      color: var(--text);
+      border-right: 2px solid var(--accent);
+      padding-right: 3px;
+      animation: blink 1s step-end infinite;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.9s forwards;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #000;
+      font-weight: 600;
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+      padding: 11px 22px;
+      border-radius: 100px;
+      transition: all 0.2s;
+    }
+    .btn-primary:hover { filter: brightness(1.1); transform: translateY(-1px); }
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--text);
+      font-weight: 500;
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+      padding: 11px 22px;
+      border-radius: 100px;
+      border: 1px solid var(--border-hi);
+      transition: all 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--text); background: rgba(255,255,255,0.04); }
+    .hero-scroll {
+      position: absolute;
+      bottom: 32px;
+      right: 40px;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      opacity: 0;
+      animation: fadeUp 0.8s 1.2s forwards;
+    }
+    .hero-scroll span {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: var(--text-faint);
+      text-transform: uppercase;
+      writing-mode: vertical-rl;
+    }
+    .hero-scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--text-faint), transparent);
+      animation: pulse-line 2s ease-in-out infinite;
+    }
+
+    @keyframes fadeUp { to { opacity: 1; transform: none; } from { opacity: 0; transform: translateY(20px); } }
+    @keyframes blink { 0%,100% { border-color: var(--accent); } 50% { border-color: transparent; } }
+    @keyframes pulse-line { 0%,100% { opacity: 0.3; } 50% { opacity: 1; } }
+
+    /* ─── Layout ─── */
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+    section {
+      padding: 100px 0;
+      border-top: 1px solid var(--border);
+    }
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 48px;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    h2.section-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .section-sub {
+      color: var(--text-dim);
+      font-size: 0.95rem;
+      margin-bottom: 48px;
+      max-width: 520px;
+    }
+
+    /* ─── About ─── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px 64px;
+      align-items: start;
+    }
+    .about-text p {
+      color: var(--text-dim);
+      line-height: 1.8;
+      font-size: 0.95rem;
+      margin-bottom: 16px;
+    }
+    .about-text p:last-child { margin-bottom: 0; }
+    .skills-col h4 {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin-bottom: 12px;
+    }
+    .skill-group {
+      margin-bottom: 28px;
+    }
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .tag {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text-dim);
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 5px 13px;
+      transition: all 0.2s;
+      cursor: default;
+    }
+    .tag:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-dim);
+    }
+
+    /* ─── Projects ─── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .project-card {
+      background: var(--bg1);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+      cursor: pointer;
+    }
+    .project-card:hover {
+      border-color: var(--border-hi);
+      transform: translateY(-3px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.4);
+    }
+    .project-card.featured {
+      grid-column: span 2;
+    }
+    .project-card.featured .card-imgs {
+      height: 240px;
+    }
+    .card-imgs {
+      height: 190px;
+      overflow: hidden;
+      position: relative;
+      background: var(--bg2);
+    }
+    .card-imgs-inner {
+      display: flex;
+      gap: 6px;
+      padding: 12px;
+      height: 100%;
+    }
+    .card-imgs-inner img {
+      flex: 1 1 0;
+      min-width: 0;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .card-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: var(--bg);
+      color: var(--text-dim);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 4px 10px;
+    }
+    .card-badge.gold { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }
+    .card-badge.accent { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
+    .card-body {
+      padding: 20px 22px 22px;
+    }
+    .card-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+      letter-spacing: -0.01em;
+    }
+    .card-desc {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    .card-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+    .card-tech span {
+      font-size: 0.7rem;
+      color: var(--text-faint);
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2px 8px;
+    }
+    .card-links {
+      display: flex;
+      gap: 10px;
+    }
+    .card-link {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--text-dim);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 5px 12px;
+      transition: all 0.2s;
+    }
+    .card-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    /* Expandable images in card */
+    .card-gallery {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+      margin-bottom: 16px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+    .card-gallery img {
+      height: 90px;
+      width: auto;
+      border-radius: 8px;
+      object-fit: cover;
+      cursor: zoom-in;
+      flex-shrink: 0;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s;
+    }
+    .card-gallery img:hover { border-color: var(--border-hi); }
+
+    /* ─── Work Experience ─── */
+    .exp-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .exp-item {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .exp-item:hover { border-color: var(--border-hi); }
+    .exp-header {
+      display: flex;
+      align-items: center;
+      padding: 20px 24px;
+      background: var(--bg1);
+      gap: 16px;
+    }
+    .exp-header:hover { background: var(--bg2); }
+    .exp-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .exp-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .exp-info h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .exp-info p {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+    }
+    .exp-arrow {
+      color: var(--text-faint);
+      font-size: 0.75rem;
+      transition: transform 0.3s;
+      flex-shrink: 0;
+    }
+
+    .exp-body {
+      background: var(--bg);
+    }
+    .exp-body-inner {
+      padding: 28px 24px 32px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .exp-body-inner > p,
+    .exp-body-inner > div,
+    .exp-body-inner > video {
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+    }
+    .exp-desc {
+      font-size: 0.88rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .exp-learned h4 {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .exp-learned ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .exp-learned ul li {
+      font-size: 0.83rem;
+      color: var(--text-dim);
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .exp-learned ul li::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      margin-top: 7px;
+      flex-shrink: 0;
+    }
+    .exp-media {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    .exp-media img {
+      height: 120px;
+      width: auto;
+      border-radius: 10px;
+      object-fit: cover;
+      cursor: zoom-in;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s;
+    }
+    .exp-media img:hover { border-color: var(--border-hi); }
+    video.exp-video {
+      border-radius: 10px;
+      height: 160px;
+      max-width: 100%;
+      border: 1px solid var(--border);
+      margin-top: 16px;
+    }
+
+    /* ─── Figma / UX section ─── */
+    .ux-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--bg1);
+    }
+    .ux-card-top {
+      padding: 28px 28px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .ux-card-top h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .ux-card-top p {
+      font-size: 0.83rem;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+    .ux-card-screens {
+      display: flex;
+      gap: 12px;
+      padding: 20px;
+      overflow-x: auto;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+    .ux-screen {
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .ux-screen img {
+      height: 180px;
+      width: auto;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      cursor: zoom-in;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .ux-screen img:hover { border-color: var(--border-hi); transform: translateY(-2px); }
+    .ux-screen span {
+      font-size: 0.72rem;
+      color: var(--text-faint);
+    }
+    .ux-card-footer {
+      padding: 16px 20px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    /* ─── Contact ─── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .contact-left h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+    .contact-left p {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 18px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      transition: all 0.2s;
+      background: var(--bg1);
+    }
+    .contact-link:hover {
+      border-color: var(--border-hi);
+      background: var(--bg2);
+      transform: translateX(4px);
+    }
+    .contact-link i { color: var(--accent); width: 16px; font-size: 1rem; }
+    .contact-link-text strong {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin-bottom: 1px;
+    }
+    .contact-link-text span {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+    }
+    .contact-right {
+      background: var(--bg1);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+    }
+    .contact-right h4 {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin-bottom: 16px;
+    }
+    .edu-item { margin-bottom: 20px; }
+    .edu-item:last-child { margin-bottom: 0; }
+    .edu-item strong { font-size: 0.9rem; font-weight: 600; display: block; margin-bottom: 2px; }
+    .edu-item span { font-size: 0.8rem; color: var(--text-dim); }
+
+    /* ─── Footer ─── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    footer p { font-size: 0.75rem; color: var(--text-faint); }
+
+    /* ─── Lightbox ─── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: rgba(0,0,0,0.92);
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .lightbox.active { display: flex; }
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 88vh;
+      border-radius: 12px;
+      object-fit: contain;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 24px;
+      right: 32px;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.8rem;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+    .lightbox-close:hover { opacity: 1; }
+    .lightbox-caption {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.5);
+      white-space: nowrap;
+    }
+
+    /* ─── Mobile ─── */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; flex-direction: column; position: fixed; top: 56px; left: 0; right: 0; background: rgba(8,8,8,0.97); border-bottom: 1px solid var(--border); padding: 16px 20px 24px; gap: 4px; }
+      .nav-links.open { display: flex; }
+      .nav-links a { font-size: 0.95rem; padding: 10px 0; border-bottom: 1px solid var(--border); display: block; }
+      .nav-links li:last-child a { border-bottom: none; }
+      .nav-toggle { display: block; }
+      .hero { padding: 0 20px 64px; }
+      .hero-bg { background-size: 100%; background-position: center; opacity: 0.5; }
+      .hero-scroll { display: none; }
+      .container { padding: 0 20px; }
+      section { padding: 64px 0; }
+      .about-grid { grid-template-columns: 1fr; gap: 32px; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .project-card.featured { grid-column: span 1; }
+      .project-card.featured .card-imgs { height: 180px; }
+      .contact-grid { grid-template-columns: 1fr; gap: 32px; }
+      footer { flex-direction: column; gap: 8px; text-align: center; padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav id="nav">
+  <span class="nav-brand">Portfolio</span>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Menu"><i class="bi bi-list"></i></button>
+</nav>
+
+<!-- Hero -->
+<header class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">AI Specialist &nbsp;·&nbsp; Graphic Designer</p>
+    <h1 class="hero-name">Vuttipat<br>Prapai</h1>
+    <p class="hero-role">
+      <span id="role-text" class="typing"></span>
+    </p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn-primary"><i class="bi bi-arrow-down"></i> View Work</a>
+      <a href="#contact" class="btn-ghost"><i class="bi bi-envelope"></i> Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- About -->
+  <section id="about">
+    <div class="section-label">About</div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <h2 class="section-title" style="margin-bottom:20px;">AI Specialist<br>&amp; Graphic Designer</h2>
+        <p>IT graduate from Bangkok University, specializing in applying <strong style="color:var(--accent)">Generative AI and LLMs</strong> to streamline creative workflows. I research, implement, and prompt-engineer AI tools — then build automated pipelines that save teams real time.</p>
+        <p>I also bring hands-on graphic design skills (Photoshop, Illustrator, After Effects) which means I understand the creative pipeline I'm optimizing — not just the technology.</p>
+      </div>
+      <div class="skills-col reveal reveal-delay-2">
+        <div class="skill-group">
+          <h4>AI &amp; LLMs</h4>
+          <div class="skill-tags">
+            <span class="tag" style="border-color:var(--accent);color:var(--accent)">Google Gemini API</span>
+            <span class="tag" style="border-color:var(--accent);color:var(--accent)">Google AI Studio</span>
+            <span class="tag" style="border-color:var(--accent);color:var(--accent)">ChatGPT / GPT-4</span>
+            <span class="tag" style="border-color:var(--accent);color:var(--accent)">Claude (Anthropic)</span>
+            <span class="tag">Prompt Engineering</span>
+            <span class="tag">Workflow Automation</span>
+            <span class="tag">API Integration</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h4>Creative Tools</h4>
+          <div class="skill-tags">
+            <span class="tag">Adobe Photoshop</span>
+            <span class="tag">Adobe Illustrator</span>
+            <span class="tag">Adobe After Effects</span>
+            <span class="tag">Figma</span>
+            <span class="tag">CapCut</span>
+            <span class="tag">Canva</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h4>Development</h4>
+          <div class="skill-tags">
+            <span class="tag">JavaScript</span>
+            <span class="tag">HTML / CSS</span>
+            <span class="tag">Angular</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Work Experience -->
+  <section id="experience">
+    <div class="section-label">Experience</div>
+    <h2 class="section-title reveal">Work &amp; Design Experience</h2>
+    <p class="section-sub reveal reveal-delay-1">Internship, freelance, and self-initiated work — including an AI tool built to solve a real workflow problem.</p>
+
+    <div class="exp-list">
+
+      <!-- Content Creator Internship -->
+      <div class="exp-item reveal" style="border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent-dim);">
+        <div class="exp-header">
+          <div class="exp-left">
+            <div class="exp-icon" style="background:var(--accent-dim);border-color:var(--accent);">📱</div>
+            <div class="exp-info">
+              <h3>AI-Driven Content Workflow — Internship</h3>
+              <p style="color:var(--accent);">Company Internship · 2025 · AI Implementation · Prompt Engineering · Workflow Automation</p>
+            </div>
+          </div>
+          
+        </div>
+        <div class="exp-body">
+          <div class="exp-body-inner">
+            <p class="exp-desc">Applied AI tools end-to-end in a real company content pipeline — from writing with AI assistance to generating voice-overs and automating visual production. This role was essentially <em>AI Implementation</em> in a creative team, covering graphic design, short-form video, and article content.</p>
+
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:20px;">
+              <div style="background:var(--bg1);border:1px solid var(--border);border-radius:10px;padding:16px;">
+                <div style="font-size:1.2rem;margin-bottom:8px;">📝</div>
+                <strong style="font-size:0.82rem;display:block;margin-bottom:4px;">AI-Assisted Copywriting</strong>
+                <p style="font-size:0.78rem;color:var(--text-dim);line-height:1.5;">Used <strong style="color:var(--accent)">ChatGPT &amp; Gemini</strong> to research, draft, and fact-check website articles — then edited for tone and accuracy.</p>
+              </div>
+              <div style="background:var(--bg1);border:1px solid var(--border);border-radius:10px;padding:16px;">
+                <div style="font-size:1.2rem;margin-bottom:8px;">🎨</div>
+                <strong style="font-size:0.82rem;display:block;margin-bottom:4px;">AI-Augmented Design</strong>
+                <p style="font-size:0.78rem;color:var(--text-dim);line-height:1.5;">Designed article covers and Facebook post graphics — using AI tools to generate reference imagery and accelerate iteration.</p>
+              </div>
+              <div style="background:var(--bg1);border:1px solid var(--border);border-radius:10px;padding:16px;">
+                <div style="font-size:1.2rem;margin-bottom:8px;">🤖</div>
+                <strong style="font-size:0.82rem;display:block;margin-bottom:4px;">AI-Assisted Video</strong>
+                <p style="font-size:0.78rem;color:var(--text-dim);line-height:1.5;">Used <strong style="color:var(--accent)">Google AI Studio</strong> for text-to-voice generation, built visual sequences, and edited in CapCut for Facebook Reels &amp; TikTok.</p>
+              </div>
+            </div>
+
+            <div style="background:var(--bg1);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:20px;">
+              <div style="font-size:0.7rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-faint);margin-bottom:10px;">Tools Used</div>
+              <div class="skill-tags">
+                <span class="tag">Adobe Photoshop</span>
+                <span class="tag">Google AI Studio</span>
+                <span class="tag">CapCut</span>
+                <span class="tag">Figma</span>
+                <span class="tag">Facebook Business</span>
+                <span class="tag">TikTok</span>
+              </div>
+            </div>
+
+            <div class="exp-learned">
+              <h4>What I Learned</h4>
+              <ul>
+                <li>Implemented Google AI Studio for text-to-voice generation — eliminating manual voice recording in video production</li>
+                <li>Applied prompt engineering with ChatGPT and Gemini to speed up article research and first drafts</li>
+                <li>Designed a repeatable content workflow combining AI tools, graphic design, and short-form video editing</li>
+                <li>Gained practical understanding of AI Ethics &amp; QC — verifying AI-generated content before publishing</li>
+              </ul>
+            </div>
+
+            <!-- ─── Work Samples ─── -->
+            <div style="margin-top:24px;">
+              <div style="font-size:0.7rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-faint);margin-bottom:16px;">Featured Work Samples</div>
+              <div style="display:flex;flex-direction:column;gap:12px;">
+
+                <!-- 1. Article Graphic -->
+                <div style="background:var(--bg1);border:1px solid var(--border);border-radius:12px;overflow:hidden;">
+                  <div style="display:flex;align-items:stretch;">
+                    <div style="width:140px;flex-shrink:0;background:var(--bg2);border-right:1px solid var(--border);display:flex;align-items:center;justify-content:center;min-height:100px;">
+                      <div style="text-align:center;color:var(--text-faint);">
+                        <i class="bi bi-image" style="font-size:1.5rem;display:block;margin-bottom:4px;"></i>
+                        <span style="font-size:0.65rem;">รูปบทความ</span>
+                      </div>
+                    </div>
+                    <div style="padding:14px 16px;flex:1;">
+                      <div style="margin-bottom:6px;"><span style="font-size:0.65rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:2px 8px;color:var(--text-dim);">Article Graphic</span></div>
+                      <div style="font-size:0.85rem;font-weight:600;margin-bottom:4px;">ชื่อบทความ / Article Title</div>
+                      <div style="font-size:0.78rem;color:var(--text-dim);margin-bottom:10px;">ออกแบบกราฟิกประกอบบทความ — Published on website</div>
+                      <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+                        <div style="display:flex;align-items:center;gap:5px;"><i class="bi bi-eye" style="color:var(--accent);font-size:0.8rem;"></i><span style="font-size:0.8rem;font-weight:600;">— reads</span></div>
+                        <a href="#" target="_blank" class="card-link" style="padding:4px 10px;font-size:0.72rem;"><i class="bi bi-box-arrow-up-right"></i> View Article</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 2. Facebook Infographic -->
+                <div style="background:var(--bg1);border:1px solid var(--border);border-radius:12px;overflow:hidden;">
+                  <div style="display:flex;align-items:stretch;">
+                    <div style="width:140px;flex-shrink:0;background:var(--bg2);border-right:1px solid var(--border);display:flex;align-items:center;justify-content:center;min-height:100px;">
+                      <div style="text-align:center;color:var(--text-faint);">
+                        <i class="bi bi-image" style="font-size:1.5rem;display:block;margin-bottom:4px;"></i>
+                        <span style="font-size:0.65rem;">infographic</span>
+                      </div>
+                    </div>
+                    <div style="padding:14px 16px;flex:1;">
+                      <div style="margin-bottom:6px;"><span style="font-size:0.65rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;background:#1877f211;border:1px solid #1877f244;border-radius:4px;padding:2px 8px;color:#4a9eff;">Facebook</span></div>
+                      <div style="font-size:0.85rem;font-weight:600;margin-bottom:4px;">ชื่อโพส Infographic</div>
+                      <div style="font-size:0.78rem;color:var(--text-dim);margin-bottom:10px;">Infographic post — Facebook Page</div>
+                      <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+                        <div style="display:flex;align-items:center;gap:5px;"><i class="bi bi-hand-thumbs-up" style="color:#4a9eff;font-size:0.8rem;"></i><span style="font-size:0.8rem;font-weight:600;">— likes</span></div>
+                        <div style="display:flex;align-items:center;gap:5px;"><i class="bi bi-share" style="color:#4a9eff;font-size:0.8rem;"></i><span style="font-size:0.8rem;font-weight:600;">— shares</span></div>
+                        <a href="#" target="_blank" class="card-link" style="padding:4px 10px;font-size:0.72rem;"><i class="bi bi-facebook"></i> View Post</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 3. Short Video — dual platform -->
+                <div style="background:var(--bg1);border:1px solid var(--border);border-radius:12px;overflow:hidden;">
+                  <div style="display:flex;align-items:stretch;">
+                    <div style="width:140px;flex-shrink:0;background:var(--bg2);border-right:1px solid var(--border);display:flex;align-items:center;justify-content:center;min-height:110px;">
+                      <div style="text-align:center;color:var(--text-faint);">
+                        <i class="bi bi-camera-video" style="font-size:1.5rem;display:block;margin-bottom:4px;"></i>
+                        <span style="font-size:0.65rem;">thumbnail</span>
+                      </div>
+                    </div>
+                    <div style="padding:14px 16px;flex:1;">
+                      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px;">
+                        <span style="font-size:0.65rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;background:#1877f211;border:1px solid #1877f244;border-radius:4px;padding:2px 8px;color:#4a9eff;">Facebook Reel</span>
+                        <span style="font-size:0.65rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.15);border-radius:4px;padding:2px 8px;color:#e8e8e8;">TikTok</span>
+                        <span style="font-size:0.65rem;background:var(--accent-dim);border:1px solid var(--accent);border-radius:4px;padding:2px 8px;color:var(--accent);">AI Voice-over</span>
+                      </div>
+                      <div style="font-size:0.85rem;font-weight:600;margin-bottom:4px;">ชื่อคลิปวิดีโอ</div>
+                      <div style="font-size:0.78rem;color:var(--text-dim);margin-bottom:10px;">Google AI Studio (text-to-voice) + CapCut</div>
+                      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+                        <div style="display:flex;align-items:center;gap:5px;"><i class="bi bi-facebook" style="color:#4a9eff;font-size:0.8rem;"></i><span style="font-size:0.8rem;font-weight:600;">— views</span></div>
+                        <div style="display:flex;align-items:center;gap:5px;"><i class="bi bi-tiktok" style="color:var(--text-dim);font-size:0.8rem;"></i><span style="font-size:0.8rem;font-weight:600;">— views</span></div>
+                        <a href="#" target="_blank" class="card-link" style="padding:4px 10px;font-size:0.72rem;"><i class="bi bi-facebook"></i> Reel</a>
+                        <a href="#" target="_blank" class="card-link" style="padding:4px 10px;font-size:0.72rem;"><i class="bi bi-tiktok"></i> TikTok</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Nano Banana — built during internship -->
+      <div class="exp-item reveal" style="border-color:var(--accent);box-shadow:0 0 0 1px var(--accent-dim);">
+        <div class="exp-header">
+          <div class="exp-left">
+            <div class="exp-icon" style="background:var(--accent-dim);border-color:var(--accent);">🍌</div>
+            <div class="exp-info">
+              <h3>Nano Banana — Batch AI Image Generator</h3>
+              <p style="color:var(--accent);">Side Project built during Internship · Python · Flask · Gemini API</p>
+            </div>
+          </div>
+          
+        </div>
+        <div class="exp-body">
+          <div class="exp-body-inner">
+            <p class="exp-desc">Built to solve a real problem during internship — generating multiple graphics from prompts manually was slow. This full-stack web app accepts N prompts simultaneously and generates images in parallel via Google Gemini API, with Reference Image mode, auto-retry, real-time progress, and ZIP export.</p>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin-bottom:20px;">
+              <div style="background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;">
+                <div style="font-size:0.65rem;color:var(--text-faint);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px;">Stack</div>
+                <div style="font-size:0.78rem;color:var(--text);">Python · Flask · JS</div>
+              </div>
+              <div style="background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;">
+                <div style="font-size:0.65rem;color:var(--text-faint);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px;">API</div>
+                <div style="font-size:0.78rem;color:var(--accent);">Google Gemini API</div>
+              </div>
+              <div style="background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;">
+                <div style="font-size:0.65rem;color:var(--text-faint);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px;">Models</div>
+                <div style="font-size:0.78rem;color:var(--accent);">gemini-2.5-flash<br>gemini-3-pro</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;">
+              <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:0.75rem;color:var(--text-dim);"><i class="bi bi-input-cursor-text" style="color:var(--text-faint);"></i>N prompts + reference image</div>
+              <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:0.75rem;color:var(--text-dim);"><i class="bi bi-cpu" style="color:var(--text-faint);"></i>Parallel generation</div>
+              <div style="display:flex;align-items:center;gap:8px;background:var(--accent-dim);border:1px solid var(--accent);border-radius:8px;padding:8px 12px;font-size:0.75rem;color:var(--accent);"><i class="bi bi-images"></i>N images + ZIP export</div>
+            </div>
+            <div class="exp-learned">
+              <h4>What I Built &amp; Learned</h4>
+              <ul>
+                <li>Designed and built a full-stack AI tool end-to-end — from Flask backend to browser UI</li>
+                <li>Integrated Google Gemini API for parallel image generation with Reference Image support</li>
+                <li>Built workflow automation that directly solved a repetitive bottleneck in the internship content pipeline</li>
+                <li>Implemented auto-retry, job history, real-time progress tracking, and ZIP download</li>
+              </ul>
+            </div>
+            <div style="margin-top:16px;">
+              <a href="https://github.com/DiiwzZ/batch-image-generator" target="_blank" class="card-link" style="display:inline-flex;"><i class="bi bi-github"></i> View on GitHub</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- C2 — Internship / new work -->
+      <div class="exp-item reveal">
+        <div class="exp-header">
+          <div class="exp-left">
+            <div class="exp-icon">🎨</div>
+            <div class="exp-info">
+              <h3>Animated Profile &amp; Icon Design</h3>
+              <p>Internship — Profile illustration &amp; animated avatar · Adobe Photoshop</p>
+            </div>
+          </div>
+          
+        </div>
+        <div class="exp-body">
+          <div class="exp-body-inner">
+            <p class="exp-desc">Designed and produced an animated profile avatar and icon as part of internship work. Created both a static version and an animated GIF output using Adobe Photoshop, suitable for use across social and professional platforms.</p>
+            <div class="exp-media">
+              <img src="images/work/C2/profile.png" class="lightbox-trigger" data-caption="Profile Design — Static">
+              <img src="images/work/C2/profile_fin.gif" data-caption="Profile Design — Animated" style="height:120px;border-radius:10px;border:1px solid var(--border);">
+            </div>
+            <div class="exp-learned" style="margin-top:20px;">
+              <h4>What I Learned</h4>
+              <ul>
+                <li>Designing for digital identity — balancing personality with professionalism</li>
+                <li>Exporting assets in multiple formats (PNG, GIF) for different use contexts</li>
+                <li>Iterating on character design to match client feedback</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- C1 — Maginta -->
+      <div class="exp-item reveal reveal-delay-1">
+        <div class="exp-header">
+          <div class="exp-left">
+            <div class="exp-icon">🖨️</div>
+            <div class="exp-info">
+              <h3>Maginta Vending Machine — Sticker Design</h3>
+              <p>Freelance / Client work — Adobe Illustrator</p>
+            </div>
+          </div>
+          
+        </div>
+        <div class="exp-body">
+          <div class="exp-body-inner">
+            <p class="exp-desc">Designed and customized stickers for the Maginta instant noodle vending machine. Worked to meet client specifications using Adobe Illustrator, and saw the design through to physical installation.</p>
+            <div class="exp-media">
+              <img src="images/work/C1/design.jpg" class="lightbox-trigger" data-caption="Maginta Sticker — Design">
+              <img src="images/work/C1/xk1.png" class="lightbox-trigger" data-caption="Vending Machine (View 1)">
+              <img src="images/work/C1/xk2.png" class="lightbox-trigger" data-caption="Vending Machine (View 2)">
+            </div>
+            <div class="exp-learned" style="margin-top:20px;">
+              <h4>What I Learned</h4>
+              <ul>
+                <li>Translating client briefs into production-ready print files</li>
+                <li>Understanding physical print constraints (bleed, dimensions, material)</li>
+                <li>Seeing a design project from concept to real-world installation</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- C0 — After Effects -->
+      <div class="exp-item reveal reveal-delay-2">
+        <div class="exp-header">
+          <div class="exp-left">
+            <div class="exp-icon">🎬</div>
+            <div class="exp-info">
+              <h3>Lay's 30th Anniversary — Product Banner</h3>
+              <p>Academic Project — After Effects &amp; Photoshop</p>
+            </div>
+          </div>
+          
+        </div>
+        <div class="exp-body">
+          <div class="exp-body-inner">
+            <p class="exp-desc">Created an animated product banner for an academic campaign project. Designed static graphic elements in Photoshop, then composited and animated them in After Effects. Delivered in both video and static formats.<br><small style="color:var(--text-faint);font-style:italic;">*Academic project, not an actual brand campaign.</small></p>
+            <div style="margin-top:16px;padding:20px;border:1px dashed var(--border);border-radius:10px;background:var(--bg1);display:flex;align-items:center;gap:16px;">
+              <i class="bi bi-camera-video" style="font-size:1.8rem;color:var(--text-faint);flex-shrink:0;"></i>
+              <div>
+                <div style="font-size:0.85rem;font-weight:600;margin-bottom:4px;">Product Banner Video (After Effects)</div>
+                <div style="font-size:0.78rem;color:var(--text-dim);margin-bottom:6px;">Lay's 30th Anniversary — animated banner</div>
+                <div style="font-size:0.75rem;color:var(--text-faint);">Available upon request</div>
+              </div>
+            </div>
+            <div class="exp-learned" style="margin-top:20px;">
+              <h4>What I Learned</h4>
+              <ul>
+                <li>Motion design fundamentals — keyframing, easing, timing</li>
+                <li>Compositing layered assets from Photoshop into After Effects</li>
+                <li>Presenting a brand campaign concept through motion</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Illustrator practice -->
+      <div class="exp-item reveal reveal-delay-3">
+        <div class="exp-header">
+          <div class="exp-left">
+            <div class="exp-icon">✏️</div>
+            <div class="exp-info">
+              <h3>Illustrator Practice — Line Art &amp; Coloring</h3>
+              <p>Personal — Adobe Illustrator</p>
+            </div>
+          </div>
+          
+        </div>
+        <div class="exp-body">
+          <div class="exp-body-inner">
+            <p class="exp-desc">Self-directed practice in Adobe Illustrator, focusing on pen tool precision, line art, and digital coloring by referencing original images.</p>
+            <div class="exp-media">
+              <img src="images/illustrator/practice/pochita_originl.jpg" class="lightbox-trigger" data-caption="Original Reference">
+              <img src="images/illustrator/practice/create_with_illustrator.jpg" class="lightbox-trigger" data-caption="Redrawn with Illustrator">
+              <img src="images/illustrator/practice/Draft_cat.jpg" class="lightbox-trigger" data-caption="Cat Draft from Photo">
+            </div>
+            <div class="exp-learned" style="margin-top:20px;">
+              <h4>What I Learned</h4>
+              <ul>
+                <li>Pen tool mastery for complex curves and shapes</li>
+                <li>Color theory and digital coloring techniques</li>
+                <li>Referencing and stylizing real-world subjects</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects">
+    <div class="section-label">Projects</div>
+    <h2 class="section-title reveal">Academic &amp; Design Projects</h2>
+    <p class="section-sub reveal reveal-delay-1">Academic projects spanning web development, UX/UI design, and branding.</p>
+
+    <div class="projects-grid">
+      <!-- Cat Hotel -->
+      <div class="project-card featured reveal">
+        <div class="card-imgs">
+          <div class="card-imgs-inner">
+            <img src="images/web_Cat-hotel/ss1.png" alt="Cat Hotel Homepage" class="lightbox-trigger" data-caption="Pujo Cat Hotel — Homepage">
+            <img src="images/web_Cat-hotel/ss2.png" alt="Cat Hotel Detail" class="lightbox-trigger" data-caption="Pujo Cat Hotel — Detail">
+            <img src="images/web_Cat-hotel/ss3.png" alt="Cat Hotel Booking" class="lightbox-trigger" data-caption="Pujo Cat Hotel — Booking">
+          </div>
+          <span class="card-badge gold">Featured</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Pujo Cat Hotel — Booking System</h3>
+          <p class="card-desc">Frontend-led final project for Database course. Full booking flow with QR-code payment and payment slip upload. Built with HTML, CSS, JavaScript, Bootstrap &amp; jQuery.</p>
+          <div class="card-tech">
+            <span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>Bootstrap 5</span><span>jQuery</span>
+          </div>
+          <div class="card-links">
+            <a href="https://diiwzz.github.io/pujo-cat_hotel/" target="_blank" class="card-link"><i class="bi bi-box-arrow-up-right"></i> Live Preview</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Classroom Booking -->
+      <div class="project-card reveal reveal-delay-1">
+        <div class="card-imgs">
+          <div class="card-imgs-inner">
+            <img src="images/web_Classroom/homepage.png" alt="Classroom Booking" class="lightbox-trigger" data-caption="Classroom Booking — Homepage">
+            <img src="images/web_Classroom/new_booking.png" alt="New Booking" class="lightbox-trigger" data-caption="Classroom Booking — New Booking">
+          </div>
+          <span class="card-badge accent">Full Stack</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Classroom Booking System</h3>
+          <p class="card-desc">Full-stack Angular course final project. Online room booking with user auth, admin panel, and booking history.</p>
+          <div class="card-tech">
+            <span>Angular 16</span><span>TypeScript</span><span>Node.js</span><span>MySQL</span><span>JWT</span>
+          </div>
+          <div class="card-gallery">
+            <img src="images/web_Classroom/detail1.png" class="lightbox-trigger" data-caption="Booking Detail">
+            <img src="images/web_Classroom/detail2.png" class="lightbox-trigger" data-caption="Detail View">
+            <img src="images/web_Classroom/my_booking.png" class="lightbox-trigger" data-caption="My Bookings">
+            <img src="images/web_Classroom/new_booking2.png" class="lightbox-trigger" data-caption="Booking Form">
+          </div>
+        </div>
+      </div>
+
+      <!-- Personal Logo -->
+      <div class="project-card reveal reveal-delay-2">
+        <div class="card-imgs">
+          <div class="card-imgs-inner">
+            <img src="images/illustrator/final/logo/02Logo.png" alt="Personal Logo" class="lightbox-trigger" data-caption="Personal Logo — Final">
+            <img src="images/illustrator/final/Profile.jpg" alt="Profile Application" class="lightbox-trigger" data-caption="Logo in Profile Design">
+          </div>
+          <span class="card-badge">Illustrator</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Personal Logo Design</h3>
+          <p class="card-desc">Designed a personal logo using nickname "Dew" — a standing cat inspired by my own cat's pose. Includes sketch, final vector, and profile application.</p>
+          <div class="card-tech">
+            <span>Adobe Illustrator</span><span>Vector Design</span><span>Branding</span>
+          </div>
+          <div class="card-gallery">
+            <img src="images/illustrator/final/logo/01Logo.png" class="lightbox-trigger" data-caption="Logo Sketch">
+            <img src="images/illustrator/final/logo_source.jpg" class="lightbox-trigger" data-caption="Reference Cat Photo">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Figma / UX -->
+    <div style="margin-top:20px;" class="reveal">
+      <div class="ux-card">
+        <div class="ux-card-top">
+          <span class="card-badge gold" style="position:static;display:inline-block;margin-bottom:10px;">UX/UI Design</span>
+          <h3>BedBuddies — Hotel Booking App</h3>
+          <p>Comprehensive hotel booking app designed for IT373 course. Focus on user experience, intuitive navigation, and modern mobile-first design principles.</p>
+        </div>
+        <div class="ux-card-screens">
+          <div class="ux-screen">
+            <img src="images/figma/home_page.png" class="lightbox-trigger" data-caption="BedBuddies — Home Page">
+            <span>Home</span>
+          </div>
+          <div class="ux-screen">
+            <img src="images/figma/search_page.png" class="lightbox-trigger" data-caption="BedBuddies — Search">
+            <span>Search</span>
+          </div>
+          <div class="ux-screen">
+            <img src="images/figma/search_page2.png" class="lightbox-trigger" data-caption="BedBuddies — Results">
+            <span>Results</span>
+          </div>
+          <div class="ux-screen">
+            <img src="images/figma/booking.png" class="lightbox-trigger" data-caption="BedBuddies — Booking">
+            <span>Booking</span>
+          </div>
+          <div class="ux-screen">
+            <img src="images/figma/trip.png" class="lightbox-trigger" data-caption="BedBuddies — Trips">
+            <span>Trips</span>
+          </div>
+        </div>
+        <div class="ux-card-footer">
+          <a href="https://www.figma.com/proto/lhzDNaEymPjYeLNW3y2Vy8/UI-design?page-id=0%3A1&node-id=54-246&p=f&viewport=-2093%2C2648%2C0.51&t=prXmzIlS8OuC8C8A-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=54%3A246" target="_blank" class="card-link"><i class="bi bi-figma"></i> View Prototype on Figma</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="section-label">Contact</div>
+    <div class="contact-grid">
+      <div class="contact-left reveal">
+        <h2 class="section-title" style="margin-bottom:16px;">Let's work<br>together</h2>
+        <p>Open to full-time positions as <strong style="color:var(--accent)">AI Specialist</strong> or <strong style="color:var(--text)">Graphic Designer</strong>. I bring hands-on AI implementation experience, prompt engineering skills, and a creative background that bridges both roles.</p>
+        <div class="contact-links">
+          <a href="tel:+66661516545" class="contact-link">
+            <i class="bi bi-telephone"></i>
+            <div class="contact-link-text">
+              <strong>Phone</strong>
+              <span>066-151-6545</span>
+            </div>
+          </a>
+          <a href="mailto:diiwzz.vtp@gmail.com" class="contact-link">
+            <i class="bi bi-envelope"></i>
+            <div class="contact-link-text">
+              <strong>Email</strong>
+              <span>diiwzz.vtp@gmail.com</span>
+            </div>
+          </a>
+          <a href="https://diiwzz.github.io/portfolio/" target="_blank" class="contact-link">
+            <i class="bi bi-github"></i>
+            <div class="contact-link-text">
+              <strong>GitHub Pages</strong>
+              <span>diiwzz.github.io/portfolio</span>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="contact-right reveal reveal-delay-2">
+        <h4>Education</h4>
+        <div class="edu-item">
+          <strong>Bangkok University</strong>
+          <span>Bachelor of Science — Information Technology<br>Focus: Graphic Design &amp; Visual Communication</span>
+        </div>
+        <div style="border-top:1px solid var(--border);margin:20px 0;"></div>
+        <h4>Skills Snapshot</h4>
+        <div class="skill-tags" style="margin-top:0;">
+          <span class="tag" style="border-color:var(--accent);color:var(--accent)">Gemini API</span>
+          <span class="tag" style="border-color:var(--accent);color:var(--accent)">Prompt Engineering</span>
+          <span class="tag" style="border-color:var(--accent);color:var(--accent)">AI Studio</span>
+          <span class="tag">Photoshop</span>
+          <span class="tag">Illustrator</span>
+          <span class="tag">After Effects</span>
+          <span class="tag">Figma</span>
+          <span class="tag">JavaScript</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <p>Vuttipat Prapai (Dew) — IT Student, Bangkok University</p>
+  <p>2025</p>
+</footer>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightbox-close"><i class="bi bi-x"></i></button>
+  <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" id="lightbox-img">
+  <div class="lightbox-caption" id="lightbox-caption"></div>
+</div>
+
+<script>
+  // ── Typing animation ──
+  const roles = ['Graphic Designer', 'AI Specialist', 'Content Creator', 'UX/UI Designer', 'Content Creator'];
+  let ri = 0, ci = 0, deleting = false;
+  const el = document.getElementById('role-text');
+  function type() {
+    const word = roles[ri];
+    if (!deleting) {
+      el.textContent = word.slice(0, ++ci);
+      if (ci === word.length) { deleting = true; setTimeout(type, 1600); return; }
+    } else {
+      el.textContent = word.slice(0, --ci);
+      if (ci === 0) { deleting = false; ri = (ri + 1) % roles.length; }
+    }
+    setTimeout(type, deleting ? 45 : 90);
+  }
+  setTimeout(type, 1200);
+
+  // ── Nav scroll ──
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // ── Nav mobile toggle ──
+  const toggle = document.getElementById('nav-toggle');
+  const navLinks = document.getElementById('nav-links');
+  toggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // ── Scroll reveal ──
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+
+
+  // ── Lightbox ──
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lightbox-img');
+  const lbCap = document.getElementById('lightbox-caption');
+  document.querySelectorAll('.lightbox-trigger').forEach(img => {
+    img.addEventListener('click', () => {
+      lbImg.src = img.src;
+      lbCap.textContent = img.dataset.caption || '';
+      lb.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+  function closeLb() { lb.classList.remove('active'); document.body.style.overflow = ''; lbImg.src = ''; }
+  document.getElementById('lightbox-close').addEventListener('click', closeLb);
+  lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
+
+  // ── Smooth scroll (override anchor clicks) ──
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (!target) return;
+      e.preventDefault();
+      const top = target.getBoundingClientRect().top + window.scrollY - 64;
+      window.scrollTo({ top, behavior: 'smooth' });
+    });
+  });
+
+  // ── Tweaks ──
+  const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{"accent": "oklch(72% 0.14 195)", "heroText": "AI Specialist · Graphic Designer", "showTyping": true}/*EDITMODE-END*/;
+  let tweaks = { ...TWEAK_DEFAULTS };
+
+  function applyTweaks() {
+    document.documentElement.style.setProperty('--accent', tweaks.accent);
+    document.querySelector('.hero-eyebrow').textContent = tweaks.heroText;
+  }
+  applyTweaks();
+
+  // Tweaks panel
+  const panel = document.createElement('div');
+  panel.id = 'tweaks-panel';
+  panel.style.cssText = `display:none;position:fixed;bottom:24px;right:24px;z-index:500;background:#111;border:1px solid #2a2a2a;border-radius:16px;padding:20px;min-width:220px;font-family:inherit;`;
+  panel.innerHTML = `
+    <p style="font-size:0.7rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#555;margin-bottom:16px;">Tweaks</p>
+    <div style="margin-bottom:14px;">
+      <label style="font-size:0.75rem;color:#888;display:block;margin-bottom:6px;">Accent Color</label>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        ${[
+          ['Teal','oklch(72% 0.14 195)'],
+          ['Violet','oklch(70% 0.18 280)'],
+          ['Amber','oklch(78% 0.16 80)'],
+          ['Rose','oklch(70% 0.18 15)'],
+          ['Lime','oklch(78% 0.17 130)'],
+        ].map(([n,v]) => `<button onclick="setAccent('${v}')" title="${n}" style="width:22px;height:22px;border-radius:50%;background:${v};border:2px solid transparent;cursor:pointer;transition:border-color 0.2s;" onmouseover="this.style.borderColor='#fff'" onmouseout="this.style.borderColor='transparent'"></button>`).join('')}
+      </div>
+    </div>
+    <div>
+      <label style="font-size:0.75rem;color:#888;display:block;margin-bottom:6px;">Hero Tag</label>
+      <input id="tweak-hero" value="${tweaks.heroText}" style="width:100%;background:#0a0a0a;border:1px solid #2a2a2a;border-radius:8px;padding:6px 10px;color:#e8e8e8;font-size:0.8rem;outline:none;" oninput="setHeroText(this.value)">
+    </div>
+  `;
+  document.body.appendChild(panel);
+
+  window.setAccent = (v) => {
+    tweaks.accent = v;
+    applyTweaks();
+    window.parent.postMessage({ type: '__edit_mode_set_keys', edits: tweaks }, '*');
+  };
+  window.setHeroText = (v) => {
+    tweaks.heroText = v;
+    document.querySelector('.hero-eyebrow').textContent = v;
+    window.parent.postMessage({ type: '__edit_mode_set_keys', edits: tweaks }, '*');
+  };
+
+  window.addEventListener('message', e => {
+    if (e.data?.type === '__activate_edit_mode') panel.style.display = 'block';
+    if (e.data?.type === '__deactivate_edit_mode') panel.style.display = 'none';
+  });
+  window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+</script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+# Builder artifact — not referenced by index.html
+.thumbnail
+
+# OS
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Local scratch
+*.bak
+*.orig

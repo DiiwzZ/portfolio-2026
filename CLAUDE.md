@@ -96,28 +96,43 @@ These exist because they were violated before and had to be undone:
 - **No new emoji** beyond the ones already in `exp-icon`.
 - **Scope changes narrowly.** Fix what was asked; do not redesign adjacent sections.
 
+## Image pipeline
+
+Images were compressed on 2026-08-25: 33 MB on disk down to 3.2 MB, and the page went from
+29.7 MB to 2.9 MB fully loaded / **123 KB on first paint** (only the hero art loads eagerly;
+everything else is `loading="lazy"`).
+
+Rules the working script applied, worth keeping if new images are added:
+
+- **No CMYK.** Three source files were CMYK JPEGs, which browsers render with wrong colours —
+  fatal on a design portfolio. Always convert to sRGB.
+- **Opaque source → JPEG q85.** Most "PNG" screenshots had an alpha channel carrying no
+  information at all.
+- **Transparent source → lossy WebP.** Photographic content with alpha is the worst case for PNG
+  and there is no `pngquant` on this machine. Only `images/main.webp` (hero) is actually
+  referenced; the other WebP files are unused assets.
+- **Never blindly quantize.** A 255-colour palette visibly bands gradients and photos. The script
+  measured the error and refused it — flat logos passed, the hero and the 3D icons did not.
+- Longest side capped at 1600px (the lightbox shows at most ~90vw), animated avatar at 300px.
+- Every `<img>` carries `width`/`height` so the browser reserves the box before the file lands.
+
 ## Known issues
 
-Audited 2026-08-24. All still open — see `CLAUDE-HANDOFF.md` for the original TODO list.
+Audited 2026-08-24; performance and placeholder items fixed 2026-08-25. See `CLAUDE-HANDOFF.md`
+for the original TODO list.
 
-**Blocking the site's credibility:**
+**Removed, pending real content:** the **Work Samples** block was deleted from the first
+Experience card because it shipped visible placeholder copy (`Article Title`, `— reads`) to the
+live page. Recover the markup with `git show 4047104:index.html` (lines 936–1012) once the three
+slots have real images, titles, URLs, and engagement numbers.
 
-- The **Work Samples** block ([index.html:936](index.html:936)) inside the first Experience card
-  still renders placeholder copy — literally `ชื่อบทความ / Article Title`, `— reads`, `รูปบทความ`
-  — on the live page. Three slots need real images, titles, URLs, and engagement numbers.
-- **29.7 MB of images load eagerly.** No `loading="lazy"`, no `width`/`height` on any of the 27
-  `<img>` tags. `images/work/C1/design.jpg` alone is 11.7 MB. This is the single biggest problem
-  for a recruiter on mobile.
+**Still open:**
 
-**Bugs:**
-
-- [index.html:1438](index.html:1438) — `document.querySelector(a.getAttribute('href'))` throws
-  `SyntaxError` on the four `href="#"` placeholder links, so `preventDefault()` never runs and the
-  page jumps to top.
 - [index.html:72](index.html:72) — `background: var(--bg)/0;` is invalid CSS, silently dropped.
-
-**Accessibility:** 19 of 27 images have no `alt`. No `prefers-reduced-motion` despite ~8 animations.
-`<html lang="en">` while placeholder copy is Thai.
+- **Accessibility:** 19 of 26 images have no `alt`. No `prefers-reduced-motion` despite ~8
+  animations.
+- `og:description` still says "Graphic Designer & UX/UI Designer" with no mention of AI, so link
+  previews sent to recruiters undersell the primary role.
 
 **Dead code:** `.exp-item` was once an accordion; the arrow markup was removed but `.exp-arrow`,
 six empty `<div>`s in each `exp-header`, and a misleading `.exp-header:hover` background remain.

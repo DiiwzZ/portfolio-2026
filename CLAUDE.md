@@ -5,7 +5,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## What this is
 
 Personal job-application portfolio for **Vuttipat Prapai (Dew)**, targeting two roles:
-**AI Specialist** (primary emphasis) and **Graphic Designer** (secondary).
+**Content Creator** (primary emphasis) and **Graphic Designer** (secondary).
+
+**Repositioned 2026-11-23, away from "AI Specialist".** An audit showed the portfolio claimed AI
+Specialist loudest while holding the least proof of it — both AI cards had no images, only a GitHub
+link — so the claim was dropped rather than propped up. The internship was, in substance, content
+production: articles, social graphics, short-form video. The AI tools he used are still listed, as
+tools, lower down. Do not re-promote AI to a claimed role without new evidence behind it.
 
 Target deploy is `https://diiwzz.github.io/portfolio-2026/` — GitHub Pages, repo
 `DiiwzZ/portfolio-2026`, branch `master`.
@@ -77,7 +83,10 @@ needed, use `oklch()` tuned to the existing palette.
 
 Two rules govern accent usage:
 
-- `--accent` (teal) marks **anything AI-related** — tags, badges, card borders
+- `--accent` (teal) marks **the lead role's evidence** — content work. Exactly one Experience card
+  carries the accent border and glow: *Content Production — Internship*. Nano Banana used to carry
+  it back when AI was the claimed role; it was deliberately demoted to a plain border so the
+  highlight follows the positioning rather than contradicting it.
 - `--gold` is **only** the featured-project badge
 
 Typography is the system font stack. **Do not switch to a Google Font** — it costs a render-blocking
@@ -149,11 +158,22 @@ Cannot be completed without information only he has: the three Work Samples entr
 (there is no download button anywhere), and a YouTube link for the After Effects banner — the file
 was too large for GitHub, so the card currently says "Available upon request".
 
-## Job-description coverage
+## Evidence behind each claim
 
-What the portfolio proves today, and the one real gap:
+Audited 2026-11-23. Graded by what a recruiter can actually click or look at.
 
-- **AI Specialist** — AI implementation, workflow optimization, prompt engineering, AI ethics/QC,
-  and Python all have concrete evidence. **Data Analysis has none.**
-- **Graphic Designer** — Illustrator, Photoshop, and print/signage work are covered.
-  **SketchUp 3D is absent** and there is nothing to show for it.
+- **Content Creator** (lead role) — **no visible proof at all.** The work is described in the
+  internship card but nothing is shown: no article, no graphic, no video. This is the single
+  biggest hole in the portfolio, and it is the role it now leads with. The three Work Samples
+  slots exist to fix exactly this.
+- **Graphic Designer** — strongest evidence. Maginta is real client work installed on a physical
+  vending machine (3 photos); plus the animated avatar, Illustrator practice, personal logo.
+  The Lay's After Effects card still shows nothing at all.
+- **UX/UI Designer** (typing animation only, not a claimed role) — one academic project,
+  BedBuddies, but with a working Figma prototype link.
+- **Not claimed, though well evidenced:** frontend and full-stack web development — Pujo Cat Hotel
+  has a live demo, Classroom Booking is Angular + Node + MySQL + JWT, Nano Banana is Python/Flask
+  with a public repo. He was asked whether to add Developer as a third role and chose not to.
+
+All three external proof links were verified working on 2026-11-23: the Pujo Cat Hotel demo, the
+batch-image-generator repo, and the Figma prototype.

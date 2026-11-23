@@ -130,10 +130,15 @@ Rules the working script applied, worth keeping if new images are added:
 Audited 2026-08-24; performance and placeholder items fixed 2026-08-25. See `CLAUDE-HANDOFF.md`
 for the original TODO list.
 
-**Removed, pending real content:** the **Work Samples** block was deleted from the first
-Experience card because it shipped visible placeholder copy (`Article Title`, `— reads`) to the
-live page. Recover the markup with `git show 4047104:index.html` (lines 936–1012) once the three
-slots have real images, titles, URLs, and engagement numbers.
+**Work Samples: filled 2026-11-23.** The block had been deleted for shipping placeholder copy;
+it is now rebuilt from the real internship assets and the numbers in the co-op report.
+
+Source of truth for every figure in that card is the report at
+`D:\BUWORK\Year4\present\index.html` (outside this repo). Do not invent or round these numbers.
+The raw asset folders the user dropped in — `images/post/` and `images/รวมภาพ/`, 136 MB with
+Thai names — are gitignored on purpose; the curated, compressed, ASCII-named set lives in
+`images/internship/`. The still-missing piece is public URLs for individual articles, posts and
+videos, so nothing in that card links out yet.
 
 **Still open:**
 
@@ -162,10 +167,11 @@ was too large for GitHub, so the card currently says "Available upon request".
 
 Audited 2026-11-23. Graded by what a recruiter can actually click or look at.
 
-- **Content Creator** (lead role) — **no visible proof at all.** The work is described in the
-  internship card but nothing is shown: no article, no graphic, no video. This is the single
-  biggest hole in the portfolio, and it is the role it now leads with. The three Work Samples
-  slots exist to fix exactly this.
+- **Content Creator** (lead role) — **now the best-evidenced claim on the page.** Filled
+  2026-11-23 from the co-op internship report. 704,992+ video views (343K Reels / 362K TikTok),
+  24 articles written with 8 published, 11 videos, 101+ graphics, 7 Facebook infographics. The
+  three top videos are shown as real platform screenshots with the view counts visible in the
+  image, which is stronger than any number typed into the page.
 - **Graphic Designer** — strongest evidence. Maginta is real client work installed on a physical
   vending machine (3 photos); plus the animated avatar, Illustrator practice, personal logo.
   The Lay's After Effects card still shows nothing at all.

@@ -14,3 +14,8 @@ desktop.ini
 # Local scratch
 *.bak
 *.orig
+
+# Raw internship source assets (136 MB, Thai folder names).
+# The curated + compressed set lives in images/internship/ instead.
+images/post/
+images/รวมภาพ/

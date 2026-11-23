@@ -1,7 +1,11 @@
 """Compress portfolio images.
 
+Usage: python tools-compress-images.py [folder] [--apply] [--max-side=N]
+
 Dry-run by default: reports the size every file *would* become without touching
-anything. Pass --apply to actually rewrite them.
+anything. Pass --apply to actually rewrite them. The folder defaults to
+"images"; pass a subfolder when adding new assets so already-compressed files
+are not re-encoded.
 
 Rules:
   - CMYK JPEG -> sRGB (browsers render CMYK JPEG with wrong colors)
@@ -16,11 +20,17 @@ from pathlib import Path
 from PIL import Image, ImageChops, ImageSequence
 
 MAX_SIDE = 1600
+for _a in sys.argv:
+    if _a.startswith('--max-side='):
+        MAX_SIDE = int(_a.split('=', 1)[1])
 # The GIF is only ever shown at height:120px in .exp-media and is not a
 # lightbox trigger, so it never needs to be larger than this.
 MAX_SIDE_GIF = 400
 JPEG_Q = 85
 APPLY = '--apply' in sys.argv
+# Re-running over already-compressed files would re-encode them and lose a
+# little quality each pass, so the root is explicit: pass the folder to walk.
+ROOT = next((a for a in sys.argv[1:] if not a.startswith('--')), 'images')
 
 
 def has_real_alpha(im):
@@ -135,7 +145,7 @@ def encode(path):
 
 
 rows = []
-for p in sorted(Path('images').rglob('*')):
+for p in sorted(Path(ROOT).rglob('*')):
     if not p.is_file():
         continue
     old = p.stat().st_size

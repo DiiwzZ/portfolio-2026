@@ -589,6 +589,91 @@
       margin-top: 16px;
     }
 
+    /* ─── Result numbers ─── */
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .stat {
+      background: var(--bg1);
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .stat-num {
+      font-size: 1.45rem;
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--accent);
+    }
+    .stat-plus { font-size: 0.9rem; vertical-align: super; opacity: 0.7; }
+    .stat-label {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      line-height: 1.45;
+    }
+
+    /* ─── Work samples ─── */
+    .sample {
+      background: var(--bg1);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      align-items: stretch;
+    }
+    .sample-thumbs {
+      flex-shrink: 0;
+      display: flex;
+      gap: 6px;
+      padding: 12px;
+      background: var(--bg2);
+      border-right: 1px solid var(--border);
+    }
+    .sample-thumbs img {
+      height: 104px;
+      width: auto;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      cursor: zoom-in;
+      transition: border-color 0.2s;
+    }
+    .sample-thumbs img:hover { border-color: var(--accent); }
+    .sample-body { padding: 14px 16px; flex: 1; min-width: 0; }
+    .sample-kicker {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2px 8px;
+    }
+    .sample-title { font-size: 0.88rem; font-weight: 600; margin: 8px 0 4px; }
+    .sample-note { font-size: 0.78rem; color: var(--text-dim); margin-bottom: 10px; }
+    .sample-metrics {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+    .sample-metrics i { font-size: 0.8rem; margin-right: 4px; }
+    @media (max-width: 560px) {
+      .sample { flex-direction: column; }
+      .sample-thumbs { border-right: none; border-bottom: 1px solid var(--border); }
+    }
+
     /* ─── Figma / UX section ─── */
     .ux-card {
       border: 1px solid var(--border);
@@ -895,14 +980,21 @@
             <div class="exp-icon" style="background:var(--accent-dim);border-color:var(--accent);">📱</div>
             <div class="exp-info">
               <h3>Content Production — Internship</h3>
-              <p style="color:var(--accent);">Company Internship · 2025 · Article Writing · Social Graphics · Short-form Video</p>
+              <p style="color:var(--accent);">Admission Premium (UpBean Co., Ltd.) · Jan – May 2026 · Article Writing · Social Graphics · Short-form Video</p>
             </div>
           </div>
           
         </div>
         <div class="exp-body">
           <div class="exp-body-inner">
-            <p class="exp-desc">Produced content end to end for a company’s website and social channels — researching and writing articles, designing the covers and post graphics, and cutting short-form video for Facebook Reels and TikTok. I used AI tools where they genuinely saved time, and checked everything before it went out.</p>
+            <p class="exp-desc">Content Creator at <strong style="color:var(--text)">Admission Premium</strong>, an education-guidance platform for Thai high-school students choosing a degree. I researched and wrote the articles, designed the covers and post graphics, and cut the short-form video — the whole pipeline from brief to publish.</p>
+
+            <div class="stat-row">
+              <div class="stat"><span class="stat-num">704,992<span class="stat-plus">+</span></span><span class="stat-label">Video views<br><span style="color:var(--text-faint)">343K Reels · 362K TikTok</span></span></div>
+              <div class="stat"><span class="stat-num">24</span><span class="stat-label">Articles written<br><span style="color:var(--text-faint)">8 published to date</span></span></div>
+              <div class="stat"><span class="stat-num">11</span><span class="stat-label">Short-form videos<br><span style="color:var(--text-faint)">Reels + TikTok</span></span></div>
+              <div class="stat"><span class="stat-num">101<span class="stat-plus">+</span></span><span class="stat-label">Graphics<br><span style="color:var(--text-faint)">covers, banners, assets</span></span></div>
+            </div>
 
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:20px;">
               <div style="background:var(--bg1);border:1px solid var(--border);border-radius:10px;padding:16px;">
@@ -944,12 +1036,113 @@
               </ul>
             </div>
 
-            <!-- Featured Work Samples: removed until the real entries exist.
-                 It shipped as visible placeholder copy ("Article Title", "reads")
-                 on the live page, which reads as unfinished to a recruiter.
-                 Restore from git history once we have, for each of the three slots:
-                 image, real title, public URL, and engagement numbers.
-                 Original markup: git show 4047104:index.html (lines 936 to 1012) -->
+            <!-- ─── Work Samples ─── -->
+            <div>
+              <div style="font-size:0.7rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-faint);margin-bottom:16px;">Featured Work Samples</div>
+              <div style="display:flex;flex-direction:column;gap:12px;">
+                <div class="sample">
+                  <div class="sample-thumbs"><img src="images/internship/video/reel-01.jpg" class="lightbox-trigger" data-caption="สายสุขภาพที่ไม่ใช่หมอ — Facebook Reel (180,000+ views)" alt="สายสุขภาพที่ไม่ใช่หมอ — Facebook Reel (180,000+ views)" width="314" height="525" loading="lazy" decoding="async"><img src="images/internship/video/tiktok-01.jpg" class="lightbox-trigger" data-caption="สายสุขภาพที่ไม่ใช่หมอ — TikTok (114,500+ views)" alt="สายสุขภาพที่ไม่ใช่หมอ — TikTok (114,500+ views)" width="343" height="460" loading="lazy" decoding="async"></div>
+                  <div class="sample-body">
+                    <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                      <span class="sample-kicker" style="background:#1877f211;border-color:#1877f244;color:#4a9eff;">Facebook Reel</span>
+                      <span class="sample-kicker">TikTok</span>
+                      <span class="sample-kicker" style="background:var(--accent-dim);border-color:var(--accent);color:var(--accent);">AI voice-over</span>
+                    </div>
+                    <div class="sample-title">สายสุขภาพที่ไม่ใช่หมอ</div>
+                    <div class="sample-note">Health-sector careers that are not doctors · scripted, edited in CapCut, voice-over generated with Google AI Studio</div>
+                    <div class="sample-metrics">
+                      <span><i class="bi bi-facebook" style="color:#4a9eff;"></i>180,000+</span>
+                      <span><i class="bi bi-tiktok" style="color:var(--text-dim);"></i>114,500+</span>
+                      <span style="color:var(--accent);"><i class="bi bi-play-circle"></i>294,500+ total</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="sample">
+                  <div class="sample-thumbs"><img src="images/internship/video/reel-02.jpg" class="lightbox-trigger" data-caption="วิทย์กีฬา — Facebook Reel (24,000+ views)" alt="วิทย์กีฬา — Facebook Reel (24,000+ views)" width="303" height="525" loading="lazy" decoding="async"><img src="images/internship/video/tiktok-02.jpg" class="lightbox-trigger" data-caption="วิทย์กีฬา — TikTok (167,900+ views)" alt="วิทย์กีฬา — TikTok (167,900+ views)" width="350" height="459" loading="lazy" decoding="async"></div>
+                  <div class="sample-body">
+                    <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                      <span class="sample-kicker" style="background:#1877f211;border-color:#1877f244;color:#4a9eff;">Facebook Reel</span>
+                      <span class="sample-kicker">TikTok</span>
+                      <span class="sample-kicker" style="background:var(--accent-dim);border-color:var(--accent);color:var(--accent);">AI voice-over</span>
+                    </div>
+                    <div class="sample-title">วิทย์กีฬา</div>
+                    <div class="sample-note">Sports science · scripted, edited in CapCut, voice-over generated with Google AI Studio</div>
+                    <div class="sample-metrics">
+                      <span><i class="bi bi-facebook" style="color:#4a9eff;"></i>24,000+</span>
+                      <span><i class="bi bi-tiktok" style="color:var(--text-dim);"></i>167,900+</span>
+                      <span style="color:var(--accent);"><i class="bi bi-play-circle"></i>191,900+ total</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="sample">
+                  <div class="sample-thumbs"><img src="images/internship/video/reel-03.jpg" class="lightbox-trigger" data-caption="จิตวิทยา — Facebook Reel (49,000+ views)" alt="จิตวิทยา — Facebook Reel (49,000+ views)" width="313" height="525" loading="lazy" decoding="async"><img src="images/internship/video/tiktok-03.jpg" class="lightbox-trigger" data-caption="จิตวิทยา — TikTok (53,900+ views)" alt="จิตวิทยา — TikTok (53,900+ views)" width="342" height="460" loading="lazy" decoding="async"></div>
+                  <div class="sample-body">
+                    <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                      <span class="sample-kicker" style="background:#1877f211;border-color:#1877f244;color:#4a9eff;">Facebook Reel</span>
+                      <span class="sample-kicker">TikTok</span>
+                      <span class="sample-kicker" style="background:var(--accent-dim);border-color:var(--accent);color:var(--accent);">AI voice-over</span>
+                    </div>
+                    <div class="sample-title">จิตวิทยา</div>
+                    <div class="sample-note">Psychology · scripted, edited in CapCut, voice-over generated with Google AI Studio</div>
+                    <div class="sample-metrics">
+                      <span><i class="bi bi-facebook" style="color:#4a9eff;"></i>49,000+</span>
+                      <span><i class="bi bi-tiktok" style="color:var(--text-dim);"></i>53,900+</span>
+                      <span style="color:var(--accent);"><i class="bi bi-play-circle"></i>102,900+ total</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="sample">
+                  <div class="sample-thumbs" style="overflow-x:auto;"><img src="images/internship/posts/art-institute.jpg" class="lightbox-trigger" data-caption="Facebook infographic — art-institute" alt="Facebook infographic — art-institute" width="928" height="1152" loading="lazy" decoding="async"><img src="images/internship/posts/bs.jpg" class="lightbox-trigger" data-caption="Facebook infographic — bs" alt="Facebook infographic — bs" width="928" height="1152" loading="lazy" decoding="async"><img src="images/internship/posts/fly.jpg" class="lightbox-trigger" data-caption="Facebook infographic — fly" alt="Facebook infographic — fly" width="928" height="1152" loading="lazy" decoding="async"><img src="images/internship/posts/logistic.jpg" class="lightbox-trigger" data-caption="Facebook infographic — logistic" alt="Facebook infographic — logistic" width="1128" height="1400" loading="lazy" decoding="async"></div>
+                  <div class="sample-body">
+                    <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                      <span class="sample-kicker" style="background:#1877f211;border-color:#1877f244;color:#4a9eff;">Facebook</span>
+                      <span class="sample-kicker">Infographic</span>
+                    </div>
+                    <div class="sample-title">7 infographic posts</div>
+                    <div class="sample-note">Each one condenses a full article into a single readable post — course comparisons, career paths, admission routes — with the full article linked in the comments.</div>
+                    <div class="sample-metrics"><span style="color:var(--text-dim);font-weight:500;">Designed in Photoshop · Admission Premium page</span></div>
+                  </div>
+                </div>
+                <div class="sample">
+                  <div class="sample-thumbs"><img src="images/internship/articles/article-website.jpg" class="lightbox-trigger" data-caption="Published article on admissionpremium.com" alt="Published article on admissionpremium.com" width="1600" height="900" loading="lazy" decoding="async"><img src="images/internship/articles/article-website2.jpg" class="lightbox-trigger" data-caption="Published article on admissionpremium.com" alt="Published article on admissionpremium.com" width="1600" height="900" loading="lazy" decoding="async"></div>
+                  <div class="sample-body">
+                    <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                      <span class="sample-kicker">Article</span>
+                      <span class="sample-kicker">Research &amp; Writing</span>
+                    </div>
+                    <div class="sample-title">24 guidance articles on faculties, majors and careers</div>
+                    <div class="sample-note">Researched against real university curricula and fact-checked before publishing. 8 are live on admissionpremium.com; the rest were handed over scheduled.</div>
+                    <div class="sample-metrics">
+                      <span><i class="bi bi-eye" style="color:var(--accent);"></i>4,266 views</span>
+                      <span style="color:var(--text-dim);font-weight:500;">on the 8 published</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div style="font-size:0.7rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-faint);margin:24px 0 12px;">Article Graphics &mdash; 20 of 101+</div>
+              <div class="card-gallery" style="margin-bottom:0;flex-wrap:wrap;overflow-x:visible;">
+                  <img src="images/internship/graphics/banner-01.jpg" class="lightbox-trigger" data-caption="Article graphic — banner-01" alt="Article graphic — banner-01" width="880" height="245" loading="lazy" decoding="async">
+                  <img src="images/internship/graphics/banner-02.jpg" class="lightbox-trigger" data-caption="Article graphic — banner-02" alt="Article graphic — banner-02" width="1000" height="276" loading="lazy" decoding="async">
+                  <img src="images/internship/graphics/banner-03.jpg" class="lightbox-trigger" data-caption="Article graphic — banner-03" alt="Article graphic — banner-03" width="1000" height="276" loading="lazy" decoding="async">
+                  <img src="images/internship/graphics/banner-04.jpg" class="lightbox-trigger" data-caption="Article graphic — banner-04" alt="Article graphic — banner-04" width="1000" height="276" loading="lazy" decoding="async">
+                  <img src="images/internship/graphics/banner-05.jpg" class="lightbox-trigger" data-caption="Article graphic — banner-05" alt="Article graphic — banner-05" width="880" height="245" loading="lazy" decoding="async">
+                  <img src="images/internship/graphics/banner-06.jpg" class="lightbox-trigger" data-caption="Article graphic — banner-06" alt="Article graphic — banner-06" width="1000" height="278" loading="lazy" decoding="async">
+                  <img src="images/internship/graphics/cover-01.jpg" class="lightbox-trigger" data-caption="Article graphic — cover-01" alt="Article graphic — cover-01" width="1000" height="667" loading="lazy" decoding="async">
+                  <img src="images/internship/graphics/cover-02.jpg" class="lightbox-trigger" data-caption="Article graphic — cover-02" alt="Article graphic — cover-02" width="1000" height="667" loading="lazy" decoding="async">
+                  <img src="images/internship/graphics/cover-03.jpg" class="lightbox-trigger" data-caption="Article graphic — cover-03" alt="Article graphic — cover-03" width="1000" height="667" loading="lazy" decoding="async">
+                  <img src="images/internship/graphics/cover-04.jpg" class="lightbox-trigger" data-caption="Article graphic — cover-04" alt="Article graphic — cover-04" width="1000" height="667" loading="lazy" decoding="async">
+                  <img src="images/internship/graphics/visual-01.jpg" class="lightbox-trigger" data-caption="Article graphic — visual-01" alt="Article graphic — visual-01" width="1000" height="562" loading="lazy" decoding="async">
+                  <img src="images/internship/graphics/visual-02.jpg" class="lightbox-trigger" data-caption="Article graphic — visual-02" alt="Article graphic — visual-02" width="1000" height="562" loading="lazy" decoding="async">
+                  <img src="images/internship/graphics/visual-03.jpg" class="lightbox-trigger" data-caption="Article graphic — visual-03" alt="Article graphic — visual-03" width="880" height="245" loading="lazy" decoding="async">
+                  <img src="images/internship/graphics/visual-04.jpg" class="lightbox-trigger" data-caption="Article graphic — visual-04" alt="Article graphic — visual-04" width="880" height="245" loading="lazy" decoding="async">
+                  <img src="images/internship/graphics/wide-01.jpg" class="lightbox-trigger" data-caption="Article graphic — wide-01" alt="Article graphic — wide-01" width="1000" height="562" loading="lazy" decoding="async">
+                  <img src="images/internship/graphics/wide-02.jpg" class="lightbox-trigger" data-caption="Article graphic — wide-02" alt="Article graphic — wide-02" width="1000" height="562" loading="lazy" decoding="async">
+                  <img src="images/internship/graphics/wide-03.jpg" class="lightbox-trigger" data-caption="Article graphic — wide-03" alt="Article graphic — wide-03" width="1000" height="562" loading="lazy" decoding="async">
+                  <img src="images/internship/graphics/wide-04.jpg" class="lightbox-trigger" data-caption="Article graphic — wide-04" alt="Article graphic — wide-04" width="1000" height="562" loading="lazy" decoding="async">
+                  <img src="images/internship/graphics/wide-05.jpg" class="lightbox-trigger" data-caption="Article graphic — wide-05" alt="Article graphic — wide-05" width="1000" height="562" loading="lazy" decoding="async">
+                  <img src="images/internship/graphics/wide-06.jpg" class="lightbox-trigger" data-caption="Article graphic — wide-06" alt="Article graphic — wide-06" width="1000" height="562" loading="lazy" decoding="async">
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -27,7 +27,7 @@ manager trust him more?" — not by code elegance.
 ## No build system
 
 There is no npm, no bundler, no tests, no linter. `index.html` is the entire application:
-HTML + `<style>` + `<script>` inline in one 1,499-line file. Editing it is the whole workflow.
+HTML + `<style>` + `<script>` inline in one ~1,580-line file. Editing it is the whole workflow.
 
 Preview locally:
 
@@ -58,7 +58,8 @@ project — leave it alone.
 Single file, five sections in this fixed order:
 
 1. **Hero** — name + typing animation cycling job titles
-2. **About** — copy + three skill groups (AI & LLMs / Creative Tools / Development)
+2. **About** — copy + four skill groups (Content & Social / Creative Tools / AI Tools /
+   Development), in that order: the lead role first, AI demoted to tools
 3. **Experience** — real work; the most important section
 4. **Projects** — coursework
 5. **Contact**
@@ -125,6 +126,10 @@ Rules the working script applied, worth keeping if new images are added:
 - Longest side capped at 1600px (the lightbox shows at most ~90vw), animated avatar at 300px.
 - Every `<img>` carries `width`/`height` so the browser reserves the box before the file lands.
 
+`tools-compress-images.py` takes a folder and `--max-side=N`, and defaults to a dry run. Always
+point it at the new subfolder rather than all of `images/`: re-running it over already-compressed
+files re-encodes them and loses a little quality each pass.
+
 ## Known issues
 
 Audited 2026-08-24; performance and placeholder items fixed 2026-08-25. See `CLAUDE-HANDOFF.md`
@@ -140,22 +145,29 @@ Thai names — are gitignored on purpose; the curated, compressed, ASCII-named s
 `images/internship/`. The still-missing piece is public URLs for individual articles, posts and
 videos, so nothing in that card links out yet.
 
-**Still open:**
+**Cleared 2026-11-25.** All 52 images now carry `alt`; a `prefers-reduced-motion` block covers
+the ~8 animations, and the JS checks the same media query for the typing animation and the
+smooth-scroll handler. The invalid `background: var(--bg)/0`, the leftover accordion markup
+(`.exp-arrow`, six blank lines in `exp-header`, the `.exp-header:hover` background that implied
+a card you could click), `.project-card`'s misleading `cursor:pointer`, the unused `.exp-video`,
+`.reveal-delay-4` and `.contact-left h3`, and the builder **tweaks panel** (51 lines that posted
+to `window.parent`) are all gone. External links carry `rel="noopener noreferrer"`, and the
+animated avatar is finally wired to the lightbox.
 
-- [index.html:72](index.html:72) — `background: var(--bg)/0;` is invalid CSS, silently dropped.
-- **Accessibility:** 19 of 26 images have no `alt`. No `prefers-reduced-motion` despite ~8
-  animations.
-- `og:description` still says "Graphic Designer & UX/UI Designer" with no mention of AI, so link
-  previews sent to recruiters undersell the primary role.
+Removing the tweaks panel was safe because `applyTweaks()` only re-applied two values that the
+document already has: `--accent` matches `:root` exactly, and the hero eyebrow text is in the
+HTML. Check that again before reinstating anything like it.
 
-**Dead code:** `.exp-item` was once an accordion; the arrow markup was removed but `.exp-arrow`,
-six empty `<div>`s in each `exp-header`, and a misleading `.exp-header:hover` background remain.
-`.project-card` sets `cursor:pointer` but is not clickable. `.exp-video` and `.reveal-delay-4` are
-unused. The builder **tweaks panel** ([index.html:1445](index.html:1445)–end, ~55 lines) posts to
-`window.parent` and should not ship to production.
+**Reduced motion is easy to get wrong here:** the hero and every `.reveal` block start at
+`opacity: 0` and are faded in, so switching animations off without forcing `opacity: 1` would
+leave the page blank. The rule does that explicitly. The browser pane cannot emulate the media
+query, so to verify it, temporarily swap the condition for `(min-width: 1px)`, load the page,
+measure, and swap it back.
+
+**Still open:** nothing from the original audit. Remaining work needs the user — see below.
 
 **Unused assets:** `images/work/C0/` (5 Photoshop cut-outs for the Lay's banner — that card
-currently shows no images at all), `images/figma_main.png`, `images/illustrator/AI_logo.png`.
+still shows no images at all), `images/figma_main.webp`, `images/illustrator/AI_logo.webp`.
 
 ## Waiting on the user
 

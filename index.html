@@ -57,7 +57,6 @@
     .reveal-delay-1 { transition-delay: 0.1s; }
     .reveal-delay-2 { transition-delay: 0.2s; }
     .reveal-delay-3 { transition-delay: 0.3s; }
-    .reveal-delay-4 { transition-delay: 0.4s; }
 
     /* ─── Nav ─── */
     nav {
@@ -69,7 +68,6 @@
       justify-content: space-between;
       padding: 0 40px;
       height: 56px;
-      background: var(--bg)/0;
       border-bottom: 1px solid transparent;
       transition: background 0.4s, border-color 0.4s, backdrop-filter 0.4s;
     }
@@ -339,7 +337,6 @@
       border-radius: var(--radius-lg);
       overflow: hidden;
       transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
-      cursor: pointer;
     }
     .project-card:hover {
       border-color: var(--border-hi);
@@ -479,7 +476,6 @@
       background: var(--bg1);
       gap: 16px;
     }
-    .exp-header:hover { background: var(--bg2); }
     .exp-left {
       display: flex;
       align-items: center;
@@ -506,13 +502,6 @@
       font-size: 0.78rem;
       color: var(--text-dim);
     }
-    .exp-arrow {
-      color: var(--text-faint);
-      font-size: 0.75rem;
-      transition: transform 0.3s;
-      flex-shrink: 0;
-    }
-
     .exp-body {
       background: var(--bg);
     }
@@ -581,14 +570,6 @@
       transition: border-color 0.2s;
     }
     .exp-media img:hover { border-color: var(--border-hi); }
-    video.exp-video {
-      border-radius: 10px;
-      height: 160px;
-      max-width: 100%;
-      border: 1px solid var(--border);
-      margin-top: 16px;
-    }
-
     /* ─── Result numbers ─── */
     .stat-row {
       display: grid;
@@ -737,12 +718,6 @@
       gap: 48px;
       align-items: start;
     }
-    .contact-left h3 {
-      font-size: 1.4rem;
-      font-weight: 700;
-      margin-bottom: 8px;
-      letter-spacing: -0.01em;
-    }
     .contact-left p {
       font-size: 0.9rem;
       color: var(--text-dim);
@@ -870,6 +845,27 @@
       .contact-grid { grid-template-columns: 1fr; gap: 32px; }
       footer { flex-direction: column; gap: 8px; text-align: center; padding: 24px 20px; }
     }
+    /* ─── Reduced motion ─── */
+    /* The hero and the reveal blocks start at opacity:0 and are brought in by
+       an animation, so simply switching animations off would leave the page
+       blank. Everything that fades in has to be forced visible here. */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      html { scroll-behavior: auto; }
+      .hero-eyebrow, .hero-name, .hero-role, .hero-actions, .hero-scroll,
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+      .hero-role .typing { border-right-color: var(--accent) !important; }
+      .project-card:hover, .contact-link:hover, .ux-screen img:hover,
+      .btn-primary:hover { transform: none !important; }
+    }
   </style>
 </head>
 <body>
@@ -983,7 +979,6 @@
               <p style="color:var(--accent);">Admission Premium (UpBean Co., Ltd.) · Jan – May 2026 · Article Writing · Social Graphics · Short-form Video</p>
             </div>
           </div>
-          
         </div>
         <div class="exp-body">
           <div class="exp-body-inner">
@@ -1157,7 +1152,6 @@
               <p>Side Project built during Internship · Python · Flask · Gemini API</p>
             </div>
           </div>
-          
         </div>
         <div class="exp-body">
           <div class="exp-body-inner">
@@ -1191,7 +1185,7 @@
               </ul>
             </div>
             <div style="margin-top:16px;">
-              <a href="https://github.com/DiiwzZ/batch-image-generator" target="_blank" class="card-link" style="display:inline-flex;"><i class="bi bi-github"></i> View on GitHub</a>
+              <a href="https://github.com/DiiwzZ/batch-image-generator" target="_blank" rel="noopener noreferrer" class="card-link" style="display:inline-flex;"><i class="bi bi-github"></i> View on GitHub</a>
             </div>
           </div>
         </div>
@@ -1207,14 +1201,13 @@
               <p>Internship — Profile illustration &amp; animated avatar · Adobe Photoshop</p>
             </div>
           </div>
-          
         </div>
         <div class="exp-body">
           <div class="exp-body-inner">
             <p class="exp-desc">Designed and produced an animated profile avatar and icon as part of internship work. Created both a static version and an animated GIF output using Adobe Photoshop, suitable for use across social and professional platforms.</p>
             <div class="exp-media">
-              <img src="images/work/C2/profile.jpg" class="lightbox-trigger" data-caption="Profile Design — Static" width="564" height="613" loading="lazy" decoding="async">
-              <img src="images/work/C2/profile_fin.webp" data-caption="Profile Design — Animated" style="height:120px;border-radius:10px;border:1px solid var(--border);" width="276" height="300" loading="lazy" decoding="async">
+              <img src="images/work/C2/profile.jpg" alt="Illustrated profile avatar, static version" class="lightbox-trigger" data-caption="Profile Design — Static" width="564" height="613" loading="lazy" decoding="async">
+              <img src="images/work/C2/profile_fin.webp" alt="Illustrated profile avatar, animated version" class="lightbox-trigger" data-caption="Profile Design — Animated" style="height:120px;border-radius:10px;border:1px solid var(--border);" width="276" height="300" loading="lazy" decoding="async">
             </div>
             <div class="exp-learned" style="margin-top:20px;">
               <h4>What I Learned</h4>
@@ -1239,15 +1232,14 @@
               <p>Freelance / Client work — Adobe Illustrator</p>
             </div>
           </div>
-          
         </div>
         <div class="exp-body">
           <div class="exp-body-inner">
             <p class="exp-desc">Designed and customized stickers for the Maginta instant noodle vending machine. Worked to meet client specifications using Adobe Illustrator, and saw the design through to physical installation.</p>
             <div class="exp-media">
-              <img src="images/work/C1/design.jpg" class="lightbox-trigger" data-caption="Maginta Sticker — Design" width="1600" height="1007" loading="lazy" decoding="async">
-              <img src="images/work/C1/xk1.jpg" class="lightbox-trigger" data-caption="Vending Machine (View 1)" width="1200" height="1600" loading="lazy" decoding="async">
-              <img src="images/work/C1/xk2.jpg" class="lightbox-trigger" data-caption="Vending Machine (View 2)" width="1201" height="1600" loading="lazy" decoding="async">
+              <img src="images/work/C1/design.jpg" alt="Maginta vending machine sticker artwork, print-ready layout" class="lightbox-trigger" data-caption="Maginta Sticker — Design" width="1600" height="1007" loading="lazy" decoding="async">
+              <img src="images/work/C1/xk1.jpg" alt="Maginta vending machine with the stickers installed, front view" class="lightbox-trigger" data-caption="Vending Machine (View 1)" width="1200" height="1600" loading="lazy" decoding="async">
+              <img src="images/work/C1/xk2.jpg" alt="Maginta vending machine with the stickers installed, side view" class="lightbox-trigger" data-caption="Vending Machine (View 2)" width="1201" height="1600" loading="lazy" decoding="async">
             </div>
             <div class="exp-learned" style="margin-top:20px;">
               <h4>What I Learned</h4>
@@ -1271,7 +1263,6 @@
               <p>Academic Project — After Effects &amp; Photoshop</p>
             </div>
           </div>
-          
         </div>
         <div class="exp-body">
           <div class="exp-body-inner">
@@ -1306,15 +1297,14 @@
               <p>Personal — Adobe Illustrator</p>
             </div>
           </div>
-          
         </div>
         <div class="exp-body">
           <div class="exp-body-inner">
             <p class="exp-desc">Self-directed practice in Adobe Illustrator, focusing on pen tool precision, line art, and digital coloring by referencing original images.</p>
             <div class="exp-media">
-              <img src="images/illustrator/practice/pochita_originl.jpg" class="lightbox-trigger" data-caption="Original Reference" width="646" height="677" loading="lazy" decoding="async">
-              <img src="images/illustrator/practice/create_with_illustrator.jpg" class="lightbox-trigger" data-caption="Redrawn with Illustrator" width="622" height="665" loading="lazy" decoding="async">
-              <img src="images/illustrator/practice/Draft_cat.jpg" class="lightbox-trigger" data-caption="Cat Draft from Photo" width="1280" height="1024" loading="lazy" decoding="async">
+              <img src="images/illustrator/practice/pochita_originl.jpg" alt="Pochita character, the original reference image" class="lightbox-trigger" data-caption="Original Reference" width="646" height="677" loading="lazy" decoding="async">
+              <img src="images/illustrator/practice/create_with_illustrator.jpg" alt="Pochita redrawn as vector line art in Illustrator" class="lightbox-trigger" data-caption="Redrawn with Illustrator" width="622" height="665" loading="lazy" decoding="async">
+              <img src="images/illustrator/practice/Draft_cat.jpg" alt="Cat line-art draft traced from a photograph" class="lightbox-trigger" data-caption="Cat Draft from Photo" width="1280" height="1024" loading="lazy" decoding="async">
             </div>
             <div class="exp-learned" style="margin-top:20px;">
               <h4>What I Learned</h4>
@@ -1354,7 +1344,7 @@
             <span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>Bootstrap 5</span><span>jQuery</span>
           </div>
           <div class="card-links">
-            <a href="https://diiwzz.github.io/pujo-cat_hotel/" target="_blank" class="card-link"><i class="bi bi-box-arrow-up-right"></i> Live Preview</a>
+            <a href="https://diiwzz.github.io/pujo-cat_hotel/" target="_blank" rel="noopener noreferrer" class="card-link"><i class="bi bi-box-arrow-up-right"></i> Live Preview</a>
           </div>
         </div>
       </div>
@@ -1375,10 +1365,10 @@
             <span>Angular 16</span><span>TypeScript</span><span>Node.js</span><span>MySQL</span><span>JWT</span>
           </div>
           <div class="card-gallery">
-            <img src="images/web_Classroom/detail1.png" class="lightbox-trigger" data-caption="Booking Detail" width="1920" height="1080" loading="lazy" decoding="async">
-            <img src="images/web_Classroom/detail2.jpg" class="lightbox-trigger" data-caption="Detail View" width="1600" height="900" loading="lazy" decoding="async">
-            <img src="images/web_Classroom/my_booking.jpg" class="lightbox-trigger" data-caption="My Bookings" width="1600" height="900" loading="lazy" decoding="async">
-            <img src="images/web_Classroom/new_booking2.jpg" class="lightbox-trigger" data-caption="Booking Form" width="1600" height="900" loading="lazy" decoding="async">
+            <img src="images/web_Classroom/detail1.png" alt="Classroom Booking — booking detail page" class="lightbox-trigger" data-caption="Booking Detail" width="1920" height="1080" loading="lazy" decoding="async">
+            <img src="images/web_Classroom/detail2.jpg" alt="Classroom Booking — room detail view" class="lightbox-trigger" data-caption="Detail View" width="1600" height="900" loading="lazy" decoding="async">
+            <img src="images/web_Classroom/my_booking.jpg" alt="Classroom Booking — list of the user’s bookings" class="lightbox-trigger" data-caption="My Bookings" width="1600" height="900" loading="lazy" decoding="async">
+            <img src="images/web_Classroom/new_booking2.jpg" alt="Classroom Booking — new booking form" class="lightbox-trigger" data-caption="Booking Form" width="1600" height="900" loading="lazy" decoding="async">
           </div>
         </div>
       </div>
@@ -1399,8 +1389,8 @@
             <span>Adobe Illustrator</span><span>Vector Design</span><span>Branding</span>
           </div>
           <div class="card-gallery">
-            <img src="images/illustrator/final/logo/01Logo.png" class="lightbox-trigger" data-caption="Logo Sketch" width="190" height="299" loading="lazy" decoding="async">
-            <img src="images/illustrator/final/logo_source.jpg" class="lightbox-trigger" data-caption="Reference Cat Photo" width="1600" height="900" loading="lazy" decoding="async">
+            <img src="images/illustrator/final/logo/01Logo.png" alt="Dew personal logo, initial sketch" class="lightbox-trigger" data-caption="Logo Sketch" width="190" height="299" loading="lazy" decoding="async">
+            <img src="images/illustrator/final/logo_source.jpg" alt="Photo of the cat whose pose the logo is based on" class="lightbox-trigger" data-caption="Reference Cat Photo" width="1600" height="900" loading="lazy" decoding="async">
           </div>
         </div>
       </div>
@@ -1416,28 +1406,28 @@
         </div>
         <div class="ux-card-screens">
           <div class="ux-screen">
-            <img src="images/figma/home_page.jpg" class="lightbox-trigger" data-caption="BedBuddies — Home Page" width="375" height="812" loading="lazy" decoding="async">
+            <img src="images/figma/home_page.jpg" alt="BedBuddies — Home Page" class="lightbox-trigger" data-caption="BedBuddies — Home Page" width="375" height="812" loading="lazy" decoding="async">
             <span>Home</span>
           </div>
           <div class="ux-screen">
-            <img src="images/figma/search_page.jpg" class="lightbox-trigger" data-caption="BedBuddies — Search" width="375" height="809" loading="lazy" decoding="async">
+            <img src="images/figma/search_page.jpg" alt="BedBuddies — Search" class="lightbox-trigger" data-caption="BedBuddies — Search" width="375" height="809" loading="lazy" decoding="async">
             <span>Search</span>
           </div>
           <div class="ux-screen">
-            <img src="images/figma/search_page2.jpg" class="lightbox-trigger" data-caption="BedBuddies — Results" width="375" height="812" loading="lazy" decoding="async">
+            <img src="images/figma/search_page2.jpg" alt="BedBuddies — Results" class="lightbox-trigger" data-caption="BedBuddies — Results" width="375" height="812" loading="lazy" decoding="async">
             <span>Results</span>
           </div>
           <div class="ux-screen">
-            <img src="images/figma/booking.png" class="lightbox-trigger" data-caption="BedBuddies — Booking" width="375" height="812" loading="lazy" decoding="async">
+            <img src="images/figma/booking.png" alt="BedBuddies — Booking" class="lightbox-trigger" data-caption="BedBuddies — Booking" width="375" height="812" loading="lazy" decoding="async">
             <span>Booking</span>
           </div>
           <div class="ux-screen">
-            <img src="images/figma/trip.jpg" class="lightbox-trigger" data-caption="BedBuddies — Trips" width="375" height="812" loading="lazy" decoding="async">
+            <img src="images/figma/trip.jpg" alt="BedBuddies — Trips" class="lightbox-trigger" data-caption="BedBuddies — Trips" width="375" height="812" loading="lazy" decoding="async">
             <span>Trips</span>
           </div>
         </div>
         <div class="ux-card-footer">
-          <a href="https://www.figma.com/proto/lhzDNaEymPjYeLNW3y2Vy8/UI-design?page-id=0%3A1&node-id=54-246&p=f&viewport=-2093%2C2648%2C0.51&t=prXmzIlS8OuC8C8A-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=54%3A246" target="_blank" class="card-link"><i class="bi bi-figma"></i> View Prototype on Figma</a>
+          <a href="https://www.figma.com/proto/lhzDNaEymPjYeLNW3y2Vy8/UI-design?page-id=0%3A1&node-id=54-246&p=f&viewport=-2093%2C2648%2C0.51&t=prXmzIlS8OuC8C8A-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=54%3A246" target="_blank" rel="noopener noreferrer" class="card-link"><i class="bi bi-figma"></i> View Prototype on Figma</a>
         </div>
       </div>
     </div>
@@ -1465,7 +1455,7 @@
               <span>diiwzz.vtp@gmail.com</span>
             </div>
           </a>
-          <a href="https://diiwzz.github.io/portfolio-2026/" target="_blank" class="contact-link">
+          <a href="https://diiwzz.github.io/portfolio-2026/" target="_blank" rel="noopener noreferrer" class="contact-link">
             <i class="bi bi-github"></i>
             <div class="contact-link-text">
               <strong>GitHub Pages</strong>
@@ -1502,7 +1492,7 @@
 
 <footer>
   <p>Vuttipat Prapai (Dew) — IT Student, Bangkok University</p>
-  <p>2025</p>
+  <p>2026</p>
 </footer>
 
 <!-- Lightbox -->
@@ -1513,6 +1503,10 @@
 </div>
 
 <script>
+  // Honour the OS "reduce motion" setting: the CSS above handles the fades,
+  // these two are driven from JS so they have to check it themselves.
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   // ── Typing animation ──
   const roles = ['Content Creator', 'Graphic Designer', 'UX/UI Designer'];
   let ri = 0, ci = 0, deleting = false;
@@ -1528,7 +1522,9 @@
     }
     setTimeout(type, deleting ? 45 : 90);
   }
-  setTimeout(type, 1200);
+  // With reduced motion, show one role instead of cycling through them.
+  if (reduceMotion) el.textContent = roles[0];
+  else setTimeout(type, 1200);
 
   // ── Nav scroll ──
   const nav = document.getElementById('nav');
@@ -1578,61 +1574,10 @@
       if (!target) return;
       e.preventDefault();
       const top = target.getBoundingClientRect().top + window.scrollY - 64;
-      window.scrollTo({ top, behavior: 'smooth' });
+      window.scrollTo({ top, behavior: reduceMotion ? 'auto' : 'smooth' });
     });
   });
 
-  // ── Tweaks ──
-  const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{"accent": "oklch(72% 0.14 195)", "heroText": "Content Creator · Graphic Designer", "showTyping": true}/*EDITMODE-END*/;
-  let tweaks = { ...TWEAK_DEFAULTS };
-
-  function applyTweaks() {
-    document.documentElement.style.setProperty('--accent', tweaks.accent);
-    document.querySelector('.hero-eyebrow').textContent = tweaks.heroText;
-  }
-  applyTweaks();
-
-  // Tweaks panel
-  const panel = document.createElement('div');
-  panel.id = 'tweaks-panel';
-  panel.style.cssText = `display:none;position:fixed;bottom:24px;right:24px;z-index:500;background:#111;border:1px solid #2a2a2a;border-radius:16px;padding:20px;min-width:220px;font-family:inherit;`;
-  panel.innerHTML = `
-    <p style="font-size:0.7rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#555;margin-bottom:16px;">Tweaks</p>
-    <div style="margin-bottom:14px;">
-      <label style="font-size:0.75rem;color:#888;display:block;margin-bottom:6px;">Accent Color</label>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;">
-        ${[
-          ['Teal','oklch(72% 0.14 195)'],
-          ['Violet','oklch(70% 0.18 280)'],
-          ['Amber','oklch(78% 0.16 80)'],
-          ['Rose','oklch(70% 0.18 15)'],
-          ['Lime','oklch(78% 0.17 130)'],
-        ].map(([n,v]) => `<button onclick="setAccent('${v}')" title="${n}" style="width:22px;height:22px;border-radius:50%;background:${v};border:2px solid transparent;cursor:pointer;transition:border-color 0.2s;" onmouseover="this.style.borderColor='#fff'" onmouseout="this.style.borderColor='transparent'"></button>`).join('')}
-      </div>
-    </div>
-    <div>
-      <label style="font-size:0.75rem;color:#888;display:block;margin-bottom:6px;">Hero Tag</label>
-      <input id="tweak-hero" value="${tweaks.heroText}" style="width:100%;background:#0a0a0a;border:1px solid #2a2a2a;border-radius:8px;padding:6px 10px;color:#e8e8e8;font-size:0.8rem;outline:none;" oninput="setHeroText(this.value)">
-    </div>
-  `;
-  document.body.appendChild(panel);
-
-  window.setAccent = (v) => {
-    tweaks.accent = v;
-    applyTweaks();
-    window.parent.postMessage({ type: '__edit_mode_set_keys', edits: tweaks }, '*');
-  };
-  window.setHeroText = (v) => {
-    tweaks.heroText = v;
-    document.querySelector('.hero-eyebrow').textContent = v;
-    window.parent.postMessage({ type: '__edit_mode_set_keys', edits: tweaks }, '*');
-  };
-
-  window.addEventListener('message', e => {
-    if (e.data?.type === '__activate_edit_mode') panel.style.display = 'block';
-    if (e.data?.type === '__deactivate_edit_mode') panel.style.display = 'none';
-  });
-  window.parent.postMessage({ type: '__edit_mode_available' }, '*');
 </script>
 </body>
 </html>
